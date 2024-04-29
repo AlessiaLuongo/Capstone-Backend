@@ -24,6 +24,7 @@ public class User {
     private String email;
     private String password;
     @Column(name = "tipo_user")
+    @Enumerated(EnumType.STRING)
     private TipoUser tipoUser;
     private String avatar;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

@@ -1,9 +1,7 @@
 package alessia.entities;
 
 import alessia.entities.enums.EventType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,7 @@ public class Activity extends Post{
     @Column(name = "end_date")
     private LocalDate endDate;
     @Column(name = "event_type")
+    @Enumerated(EnumType.STRING)
     private EventType eventType;
 
 }
