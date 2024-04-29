@@ -10,6 +10,7 @@ public class CapstoneProjectApplication {
 		SpringApplication.run(CapstoneProjectApplication.class, args);
 
 		System.out.println("Hello World!");
+
 	}
 
 }
