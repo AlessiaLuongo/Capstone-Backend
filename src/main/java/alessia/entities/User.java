@@ -20,7 +20,7 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @Setter(AccessLevel.NONE)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String username;
     private String name;

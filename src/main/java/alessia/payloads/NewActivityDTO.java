@@ -3,6 +3,7 @@ import alessia.entities.enums.EventType;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 public record NewActivityDTO(
@@ -17,6 +18,8 @@ public record NewActivityDTO(
         @Future(message = "The end date can not be in the past")
         LocalDate endDate,
         @Pattern(regexp = "CONCERT | SPORT| BUSINESS | CULTURAL | WORKSHOP | RELIGIOUS | OTHER", message = "Select a valid event type")
-        EventType eventType
+        EventType eventType,
+        boolean outdoor,
+        UUID userId
 ) {
 }

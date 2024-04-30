@@ -15,6 +15,7 @@ import java.util.UUID;
 public abstract class Post {
     @Id
     @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String title;
     private String description;
@@ -31,4 +32,16 @@ public abstract class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Post(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, List<String> listOfPictures, User user) {
+        this.title = title;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.outdoor = outdoor;
+        this.numberOfVisits = numberOfVisits;
+        this.rate = rate;
+        this.price = price;
+        this.listOfPictures = listOfPictures;
+        this.user = user;
+    }
 }

@@ -23,6 +23,4 @@ public class Location extends Post{
     @Column(name = "influx_of_people")
     @Enumerated(EnumType.STRING)
     private InfluxOfPeople influxOfPeople;
-
-
 }

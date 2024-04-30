@@ -1,5 +1,7 @@
 package alessia;
 
+import alessia.payloads.NewActivityDTO;
+import alessia.services.ActivitiesService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +12,8 @@ public class CapstoneProjectApplication {
 		SpringApplication.run(CapstoneProjectApplication.class, args);
 
 		System.out.println("Hello World!");
-
+		ActivitiesService activitiesService = new ActivitiesService();
+		        activitiesService.saveActivity(new NewActivityDTO("titolo", "blabla",  );
 	}
 
 }
