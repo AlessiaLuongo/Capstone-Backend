@@ -3,8 +3,11 @@ package alessia.entities;
 import alessia.entities.enums.TipoUser;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 @Getter
@@ -14,9 +17,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String username;
     private String name;
@@ -31,4 +35,41 @@ public class User {
     private List<Activity> listOfFavouriteActivities = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Location> listOfFavouriteLocations = new ArrayList<>();
+
+
+    public User(String username, String name, String surname, String email, String password, TipoUser tipoUser, String avatar, List<Activity> listOfFavouriteActivities, List<Location> listOfFavouriteLocations) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.tipoUser = TipoUser.USER;
+        this.avatar = avatar;
+        this.listOfFavouriteActivities = listOfFavouriteActivities;
+        this.listOfFavouriteLocations = listOfFavouriteLocations;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
