@@ -8,6 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,4 +27,11 @@ public class Location extends Post{
     @Column(name = "influx_of_people")
     @Enumerated(EnumType.STRING)
     private InfluxOfPeople influxOfPeople;
+
+
+    public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, List<String> listOfPictures, User user, LocationType locationType, InfluxOfPeople influxOfPeople) {
+        super(title, description, creationDate, outdoor, numberOfVisits, rate, price, listOfPictures, user);
+        this.locationType = locationType;
+        this.influxOfPeople = influxOfPeople;
+    }
 }

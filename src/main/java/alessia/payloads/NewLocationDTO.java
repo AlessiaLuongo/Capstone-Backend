@@ -6,6 +6,8 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.UUID;
+
 public record NewLocationDTO(
         @NotEmpty(message = "A title is required")
         String title,
@@ -16,6 +18,8 @@ public record NewLocationDTO(
         @Pattern(regexp = "NATURALISTIC | CULTURAL | HISTORICAL | SPORT | EATERY | RELIGIOUS | OTHER", message = "Select a valid location type")
         LocationType locationType,
         @Pattern(regexp = "LOW, MEDIUM, HIGH", message = "Select a valid influx of people")
-        InfluxOfPeople influxOfPeople
+        InfluxOfPeople influxOfPeople,
+        boolean outdoor,
+        UUID userId
 ) {
 }
