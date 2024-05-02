@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/{users}")
+@RequestMapping("/users")
 
 public class UsersController {
 
@@ -37,11 +37,12 @@ public class UsersController {
     }
 
     @DeleteMapping("/{userId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable UUID userId){
         this.usersService.deleteUserById(userId);
     }
+
 
 
 }
