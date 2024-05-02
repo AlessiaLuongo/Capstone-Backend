@@ -1,5 +1,6 @@
 package alessia.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,7 @@ public abstract class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+
     private User user;
 
     public Post(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, List<String> listOfPictures, User user) {

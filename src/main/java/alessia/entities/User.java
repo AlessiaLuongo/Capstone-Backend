@@ -1,6 +1,7 @@
 package alessia.entities;
 
 import alessia.entities.enums.TipoUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,9 +15,9 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "users")
+
 public class User implements UserDetails {
     @Id
     @Setter(AccessLevel.NONE)
@@ -31,9 +32,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private TipoUser tipoUser;
     private String avatar;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Activity> listOfFavouriteActivities = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Location> listOfFavouriteLocations = new ArrayList<>();
 
 

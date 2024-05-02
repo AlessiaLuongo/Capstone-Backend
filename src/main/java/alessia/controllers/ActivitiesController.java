@@ -30,7 +30,7 @@ public class ActivitiesController {
     @GetMapping
     public Page<Activity> getAllActivities(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "10") int size,
-                                           @RequestParam(defaultValue = "username")String sortBy) {
+                                           @RequestParam(defaultValue = "title")String sortBy) {
         return this.activitiesService.getAllActivities(page, size, sortBy);
     }
 
