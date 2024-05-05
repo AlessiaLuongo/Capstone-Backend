@@ -6,6 +6,7 @@ import alessia.exceptions.NotFoundException;
 import alessia.payloads.NewActivityDTO;
 import alessia.repositories.ActivitiesDAO;
 import alessia.repositories.UsersDAO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +15,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-
+@Transactional
 public class ActivitiesService {
     @Autowired
     private ActivitiesDAO activitiesDAO;
@@ -38,10 +40,13 @@ public class ActivitiesService {
 
     public Activity saveActivity(User currentUser, NewActivityDTO body)  {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(formatter);
         Activity newActivity = new Activity(
                 body.title(),
                 body.description(),
-                LocalDate.now(),
+                LocalDate.parse(formattedDate, formatter),
                 body.outdoor(),
                 0,
                 1,
@@ -50,8 +55,8 @@ public class ActivitiesService {
                 currentUser,
                 body.startDate(),
                 body.endDate(),
-                body.eventType());
-
+                body.eventType()
+        );
                 return activitiesDAO.save(newActivity);
 
     }
@@ -70,7 +75,7 @@ public class ActivitiesService {
             found.setNumberOfVisits(updatedActivity.getNumberOfVisits());
             found.setRate(updatedActivity.getRate());
             found.setPrice(updatedActivity.getPrice());
-            found.setListOfPictures(updatedActivity.getListOfPictures());
+
             found.setStartDate(updatedActivity.getStartDate());
             found.setEndDate(updatedActivity.getEndDate());
             found.setEventType(updatedActivity.getEventType());
@@ -84,10 +89,11 @@ public class ActivitiesService {
     }
 
 
-    public void deleteActivityById(UUID activityId) {
+    public void findActivityByIdAndDelete(UUID activityId) {
         Optional<Activity> optionalActivity = activitiesDAO.findActivityById(activityId);
         if (optionalActivity.isPresent()) {
             Activity found = optionalActivity.get();
+
             activitiesDAO.delete(found);
         } else {
             throw new NotFoundException("Activity not found");

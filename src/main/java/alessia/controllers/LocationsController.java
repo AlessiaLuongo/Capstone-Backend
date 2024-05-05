@@ -1,10 +1,9 @@
 package alessia.controllers;
 
-import alessia.entities.Activity;
+
 import alessia.entities.Location;
 import alessia.entities.User;
 import alessia.exceptions.BadRequestException;
-import alessia.payloads.NewActivityDTO;
 import alessia.payloads.NewLocationDTO;
 import alessia.services.LocationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/locations")
+@CrossOrigin
 
 public class LocationsController {
 

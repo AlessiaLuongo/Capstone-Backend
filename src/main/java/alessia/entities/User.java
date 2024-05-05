@@ -32,10 +32,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private TipoUser tipoUser;
     private String avatar;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Activity> listOfFavouriteActivities = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Location> listOfFavouriteLocations = new ArrayList<>();
 

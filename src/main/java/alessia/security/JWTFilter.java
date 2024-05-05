@@ -45,7 +45,9 @@ private UsersService usersService;
     }
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request){
-        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+       return   antPathMatcher.match("/auth/**", request.getServletPath()) || antPathMatcher.match("/activities", request.getServletPath());
     }
+
 }
