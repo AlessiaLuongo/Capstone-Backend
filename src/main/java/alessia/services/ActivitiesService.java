@@ -40,16 +40,14 @@ public class ActivitiesService {
 
     public Activity saveActivity(User currentUser, NewActivityDTO body)  {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate currentDate = LocalDate.now();
-        String formattedDate = currentDate.format(formatter);
+
         Activity newActivity = new Activity(
                 body.title(),
                 body.description(),
-                LocalDate.parse(formattedDate, formatter),
+                LocalDate.now(),
                 body.outdoor(),
                 0,
-                1,
+                body.rate(),
                 body.price(),
                 new ArrayList<>(),
                 currentUser,

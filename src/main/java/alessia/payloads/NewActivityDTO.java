@@ -19,6 +19,9 @@ public record NewActivityDTO(
         LocalDate endDate,
         @Pattern(regexp = "CONCERT | SPORT| BUSINESS | CULTURAL | WORKSHOP | RELIGIOUS | OTHER", message = "Select a valid event type")
         EventType eventType,
+
+        @Size(message = "Rating from 1 to 5", min = 1, max = 5)
+        Integer rate,
         boolean outdoor,
         UUID userId
 ) {
