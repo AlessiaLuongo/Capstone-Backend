@@ -44,7 +44,7 @@ public class LocationsController {
     @PutMapping("/me/{locationId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Location findLocationByIdAndUpdate(@PathVariable UUID locationId, @RequestBody Location location, @AuthenticationPrincipal User currentUser) {
-        return this.locationService.findLocationByIdAndUpdate(currentUser, locationId, location);
+        return this.locationService.findLocationByIdAndUpdate(locationId, location);
     }
 
     @DeleteMapping("/{locationId}")
