@@ -41,10 +41,10 @@ public class LocationsController {
         return this.locationService.findLocationById(locationId);
     }
 
-    @PutMapping("/{locationId}")
+    @PutMapping("/me/{locationId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Location findLocationByIdAndUpdate(@PathVariable UUID locationId, @RequestBody Location location) {
-        return this.locationService.findLocationByIdAndUpdate(locationId, location);
+    public Location findLocationByIdAndUpdate(@PathVariable UUID locationId, @RequestBody Location location, @AuthenticationPrincipal User currentUser) {
+        return this.locationService.findLocationByIdAndUpdate(currentUser, locationId, location);
     }
 
     @DeleteMapping("/{locationId}")
