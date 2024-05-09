@@ -5,6 +5,7 @@ import alessia.entities.enums.LocationType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
@@ -19,6 +20,8 @@ public record NewLocationDTO(
         LocationType locationType,
         @Pattern(regexp = "LOW, MEDIUM, HIGH", message = "Select a valid influx of people")
         InfluxOfPeople influxOfPeople,
+        @Size(message = "Rating from 1 to 5", min = 1, max = 5)
+        Integer rate,
         boolean outdoor,
         UUID userId
 ) {

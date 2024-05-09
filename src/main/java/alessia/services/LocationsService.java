@@ -46,7 +46,7 @@ public class LocationsService {
                 LocalDate.now(),
                 body.outdoor(),
                 0,
-                1,
+                body.rate(),
                 body.price(),
                 new ArrayList<>(),
                 currentUser,
