@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +36,8 @@ public class ActivitiesController {
                                            @RequestParam(defaultValue = "title")String sortBy) {
         return this.activitiesService.getAllActivities(page, size, sortBy);
     }
+
+
 
     @GetMapping("/{activityId}")
     public Activity findById(@PathVariable UUID activityId){

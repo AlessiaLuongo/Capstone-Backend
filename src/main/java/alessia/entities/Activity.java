@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "activities")
+@NamedQuery(name = "getTheBestActivities", query = "SELECT a FROM Activity a ORDER BY a.rate DESC")
 
 public class Activity extends Post{
     @Column(name = "start_date")
