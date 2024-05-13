@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "locations")
-@NamedQuery(name = "getTheBestLocations", query = "SELECT l FROM Location l ORDER BY l.rate DESC")
+
 
 public class Location extends Post{
     @Column(name = "location_type")

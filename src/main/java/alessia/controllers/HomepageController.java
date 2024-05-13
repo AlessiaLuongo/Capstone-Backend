@@ -2,11 +2,13 @@ package alessia.controllers;
 
 import alessia.entities.Activity;
 import alessia.entities.Location;
+import alessia.entities.Post;
 import alessia.repositories.ActivitiesDAO;
 import alessia.repositories.LocationsDAO;
 import alessia.services.ActivitiesService;
 import alessia.services.HomepageService;
 import alessia.services.LocationsService;
+import org.hibernate.dialect.function.array.ArrayConcatElementFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/homepage")
@@ -39,10 +41,16 @@ public class HomepageController {
 
     @GetMapping
     @PreAuthorize("permitAll")
-    public HashSet<Object> getTheBestPosts(){
-        HashSet<Object> posts = new HashSet<>();
-        posts.add( this.homepageService.getTheBestActivities());
-        posts.add(this.homepageService.getTheBesLocations());
+    public List<Object> getTheBestPosts(){
+
+        List<Activity> activities = homepageService.getTheBestActivities();
+        List<Location> locations = homepageService.getTheBestLocations();
+        List<Object> posts = Stream.concat(activities.stream(), locations.stream())
+                .sorted(Comparator.comparing(Post::getRate).reversed())
+                .collect(Collectors.toList());
+
+
+
 
          return posts;
     }

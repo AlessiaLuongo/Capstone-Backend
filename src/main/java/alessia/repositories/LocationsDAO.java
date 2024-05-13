@@ -1,5 +1,6 @@
 package alessia.repositories;
 
+import alessia.entities.Activity;
 import alessia.entities.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,6 @@ public interface LocationsDAO extends JpaRepository<Location, UUID> {
 
     Optional<Location> findLocationByTitle(String title);
 
-    @Query(name = "getTheBestLocations")
+    @Query(value = "SELECT * FROM locations ORDER BY rate DESC LIMIT 10", nativeQuery = true)
     List<Location> getTheBestLocations();
 }

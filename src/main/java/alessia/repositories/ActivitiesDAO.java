@@ -13,7 +13,7 @@ public interface ActivitiesDAO extends JpaRepository<Activity, UUID> {
     Optional<Activity> findActivityById(UUID id);
     Optional<Activity> findActivityByTitle(String title);
 
-    @Query(name = "getTheBestActivities")
+    @Query(value = "SELECT * FROM activities ORDER BY rate DESC LIMIT 10", nativeQuery = true)
     List<Activity> getTheBestActivities();
 
 }

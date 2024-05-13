@@ -7,7 +7,9 @@ import alessia.repositories.LocationsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HomepageService {
@@ -20,14 +22,11 @@ public class HomepageService {
 
 
     public List<Activity> getTheBestActivities() {
-        List<Activity> allActivities = this.activitiesDAO.getTheBestActivities();
-        return allActivities.subList(0, Math.min(10, allActivities.size()));
+        return this.activitiesDAO.getTheBestActivities();
     }
 
-    public List<Location> getTheBesLocations() {
-        List<Location> allLocations = this.locationsDAO.getTheBestLocations();
-        return allLocations.subList(0, Math.min(10, allLocations.size()));
+    public List<Location> getTheBestLocations() {
+    return this.locationsDAO.getTheBestLocations();
     }
-
 
 }
