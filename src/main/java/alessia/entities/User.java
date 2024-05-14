@@ -50,7 +50,7 @@ public class User implements UserDetails {
         this.avatar = avatar;
         this.listOfFavouriteActivities = listOfFavouriteActivities;
         this.listOfFavouriteLocations = listOfFavouriteLocations;
-    }
+}
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

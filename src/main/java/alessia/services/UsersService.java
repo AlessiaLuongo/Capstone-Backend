@@ -94,10 +94,10 @@ public class UsersService {
         return this.usersDAO.findUserByemail(email).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
-    public User uploadAvatar(UUID id, MultipartFile file)throws IOException {
-        User found = this.findUserById(id);
+    public User uploadAvatar(User user, MultipartFile file)throws IOException {
+
         String avatarUrl = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
-        found.setAvatar(avatarUrl);
-        return this.usersDAO.save(found);
+        user.setAvatar(avatarUrl);
+        return this.usersDAO.save(user);
     }
 }

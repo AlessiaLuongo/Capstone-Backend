@@ -53,10 +53,10 @@ public class UsersController {
     }
 
 
-    @PatchMapping("/{userId}/avatar")
-    public User uploadAvatar(@RequestParam("avatar") MultipartFile file, @PathVariable UUID userId){
+    @PatchMapping("/me/avatar")
+    public User uploadAvatar(@RequestParam("avatar") MultipartFile file, @AuthenticationPrincipal User user) throws IOException {
         try {
-            return usersService.uploadAvatar(userId, file);
+            return usersService.uploadAvatar(user, file);
         }catch (IOException e){
             throw new RuntimeException(e);
         }
