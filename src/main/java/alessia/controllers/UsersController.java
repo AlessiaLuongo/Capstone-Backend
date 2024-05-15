@@ -34,14 +34,14 @@ public class UsersController {
         return this.usersService.findUserById(userId);
     }
 
-    @PutMapping("/{userId}")
-   // @PreAuthorize("hasAuthority('ADMIN')")
-    public User findByIdAndUpdate(@PathVariable UUID userId, @RequestBody User body){
-        return this.usersService.findByIdAndUpdate(userId, body);
+    @PutMapping("/me")
+
+    public User findByIdAndUpdate(@AuthenticationPrincipal User user, @RequestBody User body){
+        return this.usersService.findByIdAndUpdate(user, body);
     }
 
     @DeleteMapping("/{userId}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable UUID userId){
         this.usersService.deleteUserById(userId);

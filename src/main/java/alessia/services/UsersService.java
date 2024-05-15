@@ -62,20 +62,12 @@ public class UsersService {
         return this.usersDAO.findById(id).orElseThrow(()-> new NotFoundException("User not found"));
     }
 
-    public User findByIdAndUpdate(UUID id, User updatedUser){
-        Optional<User> userOptional = this.usersDAO.findById(id);
-        if (userOptional.isPresent()){
-        User found = userOptional.get();
-        found.setUsername(updatedUser.getUsername());
-        found.setName(updatedUser.getName());
-        found.setSurname(updatedUser.getSurname());
-        found.setEmail(updatedUser.getEmail());
-        found.setPassword(bcrypt.encode(updatedUser.getPassword()));
-        found.setAvatar(updatedUser.getAvatar());
-        return this.usersDAO.save(found);
-        }else {
-            throw new NotFoundException("User not found");
-        }
+    public User findByIdAndUpdate(User user, User updatedUser) {
+        //non serve l'id, l'ho impostato su ME
+        user.setUsername(updatedUser.getUsername());
+        user.setName(updatedUser.getName());
+        user.setSurname(updatedUser.getSurname());
+        return this.usersDAO.save(user);
 
     }
 
