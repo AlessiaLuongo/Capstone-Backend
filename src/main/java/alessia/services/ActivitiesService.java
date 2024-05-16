@@ -6,6 +6,8 @@ import alessia.exceptions.NotFoundException;
 import alessia.payloads.NewActivityDTO;
 import alessia.repositories.ActivitiesDAO;
 import alessia.repositories.UsersDAO;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +36,9 @@ public class ActivitiesService {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
 
     public Page<Activity> getAllActivities(int page, int size, String sortBy){
@@ -55,7 +62,7 @@ public class ActivitiesService {
                 0,
                 body.rate(),
                 body.price(),
-                new ArrayList<>(),
+                body.picture(),
                 currentUser,
                 body.startDate(),
                 body.endDate(),
@@ -102,6 +109,16 @@ public class ActivitiesService {
         } else {
             throw new NotFoundException("Activity not found");
         }
+    }
+
+    public Activity uploadActivityPicture(UUID activityId, MultipartFile file)throws IOException {
+        Activity found = findActivityById(activityId);
+
+            String pictureUrl = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+            found.setPicture(pictureUrl);
+
+
+        return this.activitiesDAO.save(found);
     }
 
 }

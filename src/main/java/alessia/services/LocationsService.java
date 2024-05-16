@@ -48,7 +48,7 @@ public class LocationsService {
                 0,
                 body.rate(),
                 body.price(),
-                new ArrayList<>(),
+                body.picture(),
                 currentUser,
                 body.locationType(),
                 body.influxOfPeople());
@@ -72,7 +72,7 @@ public class LocationsService {
             found.setNumberOfVisits(updatedLocation.getNumberOfVisits());
             found.setRate(updatedLocation.getRate());
             found.setPrice(updatedLocation.getPrice());
-            found.setListOfPictures(updatedLocation.getListOfPictures());
+            found.setPicture(updatedLocation.getPicture());
             found.setLocationType(updatedLocation.getLocationType());
             found.setInfluxOfPeople(updatedLocation.getInfluxOfPeople());
 

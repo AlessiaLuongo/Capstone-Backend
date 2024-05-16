@@ -23,6 +23,8 @@ public record NewLocationDTO(
         @Size(message = "Rating from 1 to 5", min = 1, max = 5)
         Integer rate,
         boolean outdoor,
-        UUID userId
+        UUID userId,
+        String picture
 ) {
+
 }

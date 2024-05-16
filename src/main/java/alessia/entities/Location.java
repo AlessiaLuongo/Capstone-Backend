@@ -29,8 +29,8 @@ public class Location extends Post{
     private InfluxOfPeople influxOfPeople;
 
 
-    public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, List<String> listOfPictures, User user, LocationType locationType, InfluxOfPeople influxOfPeople) {
-        super(title, description, creationDate, outdoor, numberOfVisits, rate, price, listOfPictures, user);
+    public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocationType locationType, InfluxOfPeople influxOfPeople) {
+        super(title, description, creationDate, outdoor, numberOfVisits, rate, price, picture, user);
         this.locationType = locationType;
         this.influxOfPeople = influxOfPeople;
     }
