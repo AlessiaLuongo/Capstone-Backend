@@ -7,13 +7,17 @@ import alessia.exceptions.NotFoundException;
 import alessia.payloads.NewLocationDTO;
 import alessia.repositories.LocationsDAO;
 import alessia.repositories.UsersDAO;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -31,6 +35,9 @@ public class LocationsService {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
     public Page<Location> getAllLocations(int page, int size, String sortBy){
         if(size > 100) size = 100;
@@ -58,7 +65,7 @@ public class LocationsService {
     }
 
     public Location findLocationById(UUID locationId){
-        return locationsDAO.findLocationById(locationId).orElseThrow(()-> new NotFoundException("Activity not found"));
+        return locationsDAO.findLocationById(locationId).orElseThrow(()-> new NotFoundException("Location not found"));
     }
 
     public Location findLocationByIdAndUpdate(UUID locationId, Location updatedLocation) {
@@ -91,5 +98,15 @@ public class LocationsService {
         } else {
             throw new NotFoundException("Location not found");
         }
+    }
+
+    public Location uploadLocationPicture(UUID locationId, MultipartFile file)throws IOException {
+        Location found = findLocationById(locationId);
+
+        String pictureUrl = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setPicture(pictureUrl);
+
+
+        return this.locationsDAO.save(found);
     }
 }

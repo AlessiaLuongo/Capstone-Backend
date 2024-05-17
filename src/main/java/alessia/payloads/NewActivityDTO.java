@@ -1,6 +1,7 @@
 package alessia.payloads;
 import alessia.entities.enums.EventType;
 import jakarta.validation.constraints.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -25,6 +26,8 @@ public record NewActivityDTO(
         boolean outdoor,
         UUID userId,
         String picture
+
+
 ) {
 
 }
