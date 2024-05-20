@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/homepage")
+@RequestMapping("/")
 @CrossOrigin(origins = "http://localhost:5173")
 public class HomepageController {
 
