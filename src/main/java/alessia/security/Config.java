@@ -31,6 +31,7 @@ public class Config {
 
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/**").permitAll());
 
+
         return httpSecurity.build();
     }
 

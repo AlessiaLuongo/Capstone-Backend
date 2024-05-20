@@ -1,5 +1,7 @@
 package alessia.services;
 
+import alessia.entities.Activity;
+import alessia.entities.Location;
 import alessia.entities.User;
 import alessia.entities.enums.TipoUser;
 import alessia.exceptions.BadRequestException;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,11 +58,13 @@ public class UsersService {
                 new ArrayList<>(),
                 new ArrayList<>()
         );
+
         return this.usersDAO.save(newUser);
+
     }
 
     public User findUserById(UUID id) {
-        return this.usersDAO.findById(id).orElseThrow(()-> new NotFoundException("User not found"));
+      return  this.usersDAO.findById(id).orElseThrow(()-> new NotFoundException("User not found"));
     }
 
     public User findByIdAndUpdate(User user, User updatedUser) {
@@ -92,4 +97,6 @@ public class UsersService {
         user.setAvatar(avatarUrl);
         return this.usersDAO.save(user);
     }
+
+
 }

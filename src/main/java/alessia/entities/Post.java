@@ -30,12 +30,11 @@ public abstract class Post {
     private double price;
     private String picture;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
 
-    private User user;
 
-    public Post(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user) {
+
+
+    public Post(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture) {
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
@@ -44,6 +43,6 @@ public abstract class Post {
         this.rate = rate;
         this.price = price;
         this.picture = picture;
-        this.user = user;
+
     }
 }

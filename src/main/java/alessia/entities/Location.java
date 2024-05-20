@@ -28,10 +28,15 @@ public class Location extends Post{
     @Enumerated(EnumType.STRING)
     private InfluxOfPeople influxOfPeople;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocationType locationType, InfluxOfPeople influxOfPeople) {
-        super(title, description, creationDate, outdoor, numberOfVisits, rate, price, picture, user);
+        super(title, description, creationDate, outdoor, numberOfVisits, rate, price, picture);
         this.locationType = locationType;
         this.influxOfPeople = influxOfPeople;
+        this.user = user;
     }
 }

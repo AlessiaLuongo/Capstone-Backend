@@ -1,5 +1,10 @@
 package alessia.payloads;
+import alessia.entities.Activity;
+import alessia.entities.Location;
 import jakarta.validation.constraints.*;
+
+import java.util.Collection;
+import java.util.List;
 
 
 public record NewUserDTO(
@@ -17,5 +22,8 @@ public record NewUserDTO(
         @Size(message = "Password must be between 4 and 16 characters", min = 4, max = 16)
         String password
 
+
 ) {
+
+
 }
