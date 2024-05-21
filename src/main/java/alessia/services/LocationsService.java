@@ -58,7 +58,11 @@ public class LocationsService {
                 body.picture(),
                 currentUser,
                 body.locationType(),
-                body.influxOfPeople());
+                body.influxOfPeople(),
+                new ArrayList<>()
+
+
+        );
 
                 return locationsDAO.save(newLocation);
 

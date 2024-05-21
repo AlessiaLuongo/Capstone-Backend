@@ -32,8 +32,10 @@ public class Location extends Post{
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany
+    List<User> users;
 
-    public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocationType locationType, InfluxOfPeople influxOfPeople) {
+    public Location(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocationType locationType, InfluxOfPeople influxOfPeople, List<User> users) {
         super(title, description, creationDate, outdoor, numberOfVisits, rate, price, picture);
         this.locationType = locationType;
         this.influxOfPeople = influxOfPeople;

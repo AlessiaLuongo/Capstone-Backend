@@ -3,7 +3,9 @@ package alessia.entities;
 import alessia.entities.enums.TipoUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+
 
 public class User implements UserDetails {
     @Id
@@ -32,9 +35,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private TipoUser tipoUser;
     private String avatar;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+
+
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Activity> activities;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Location> locations;
 
 

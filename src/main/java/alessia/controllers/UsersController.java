@@ -1,5 +1,7 @@
 package alessia.controllers;
 
+import alessia.entities.Activity;
+import alessia.entities.Location;
 import alessia.entities.User;
 import alessia.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -61,5 +64,39 @@ public class UsersController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/me/favourite-activities")
+    public List<Activity> getFavouriteActivity (@AuthenticationPrincipal User user){
+        return usersService.getFavouriteActivity(user);
+    }
+
+    @PatchMapping("/me/favourite-activities/{activityId}")
+    public User addFavouriteActivity (@AuthenticationPrincipal User user, @PathVariable UUID activityId){
+        return usersService.addFavouriteActivity(user, activityId);
+    }
+
+    @DeleteMapping("/me/favourite-activities/{activityId}")
+    public void deleteFavouriteActivity(@AuthenticationPrincipal User user, @PathVariable UUID activityId) {
+        usersService.deleteFavouriteActivity(user, activityId);
+    }
+
+
+    @GetMapping("/me/favourite-locations")
+    public List<Location> getFavouriteLocations (@AuthenticationPrincipal User user){
+        return usersService.getFavouriteLocation(user);
+    }
+
+    @PatchMapping("/me/favourite-locations/{locationId}")
+    public User addFavouriteLocation (@AuthenticationPrincipal User user, @PathVariable UUID locationId){
+        return usersService.addFavouriteLocation(user, locationId);
+    }
+
+    @DeleteMapping("/me/favourite-locations/{locationId}")
+    public void deleteFavouriteLocation(@AuthenticationPrincipal User user, @PathVariable UUID locationId) {
+        usersService.deleteFavouriteLocation(user, locationId);
+    }
+
+
+
 
 }

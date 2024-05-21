@@ -66,7 +66,8 @@ public class ActivitiesService {
                 currentUser,
                 body.startDate(),
                 body.endDate(),
-                body.eventType()
+                body.eventType(),
+                new ArrayList<>()
         );
                 return activitiesDAO.save(newActivity);
 

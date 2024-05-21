@@ -32,11 +32,16 @@ public class Activity extends Post{
     @JoinColumn(name = "user_id")
     private  User user;
 
-    public Activity(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocalDate startDate, LocalDate endDate, EventType eventType) {
+    @ManyToMany
+    List<User> users;
+
+
+    public Activity(String title, String description, LocalDate creationDate, boolean outdoor, long numberOfVisits, int rate, double price, String picture, User user, LocalDate startDate, LocalDate endDate, EventType eventType, List<User> users) {
         super(title, description, creationDate, outdoor, numberOfVisits, rate, price, picture);
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventType = eventType;
         this.user = user;
+        this.users = users;
     }
 }
