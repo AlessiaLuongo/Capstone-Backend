@@ -48,7 +48,7 @@ public class Config {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://capstone-frontend-kappa.vercel.app"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://capstone-frontend-2zbsq8b4y-alessials-projects.vercel.app"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
